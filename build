@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "prepare..."
+rm -rf dist
+mkdir -p dist
+
+echo "building ldfolder.ls -> ldfolder.js ..."
+npx lsc -cp src/ldfolder.ls > dist/ldfolder.js
+echo "minify ldfolder.js -> ldfolder.min.js ..."
+npx uglifyjs dist/ldfolder.js > dist/ldfolder.min.js
+
+echo "build src/ldfolder.styl -> dist/ldfolder.css ..."
+./node_modules/.bin/stylus -p src/ldfolder.styl > dist/ldfolder.css
+echo "minifying ldfolder.css ..."
+./node_modules/.bin/uglifycss dist/ldfolder.css > dist/ldfolder.min.css
+
+echo "copy dist to web ..."
+rm -rf web/static/assets/lib/ldfolder/dev/
+mkdir -p web/static/assets/lib/ldfolder/dev/
+cp -R dist/* web/static/assets/lib/ldfolder/dev/

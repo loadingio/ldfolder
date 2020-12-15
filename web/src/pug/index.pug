@@ -1,0 +1,21 @@
+doctype html
+html
+  include /../../static/assets/lib/bootstrap.ldui/main/index.pug
+  head
+    +css("/assets/lib/bootstrap/main/css/bootstrap.min.css")
+    +css("/assets/lib/bootstrap.ldui/main/bootstrap.ldui.min.css")
+    +css("/assets/lib/ldfolder/dev/ldfolder.min.css")
+  body
+    .w-1024.mx-auto.rwd.my-4
+      #ldfd.ldfd
+        .ldfd-item ITEM1
+        .ldfd
+          .ldfd-item.ldfd-toggle ITEM2
+          .ldfd-menu
+            .ldfd-item ITEM3
+            .ldfd-item ITEM4
+
+    +script("/assets/lib/@loadingio/ldquery/main/ldq.min.js")
+    +script("/assets/lib/ldfolder/dev/ldfolder.min.js")
+    script: :lsc
+      fd = new ldfolder root: '#ldfd'

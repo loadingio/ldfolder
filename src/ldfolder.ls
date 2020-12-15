@@ -2,7 +2,10 @@ main = (opt) ->
   root = opt.root
   @root = root = if typeof(root) == \string => document.querySelector(root) else if root => root else null
   @root.addEventListener \click, (e) ~>
-    if !(p = n = ld$.parent e.target, '.ldfd-toggle', @root) => return
+    n = e.target
+    while n and n != @root and (!n.matches or (n.matches and !n.matches \.ldfd-toggle )) => n = n.parentNode
+    if !(n and n != @root) => return
+    p = n
     while (p = p.nextSibling) => if (p.classList and p.classList.contains \ldfd-menu) => break
     if p => @toggle p
   return @

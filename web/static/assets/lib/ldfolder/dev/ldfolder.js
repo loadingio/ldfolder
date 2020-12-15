@@ -8,10 +8,15 @@
       ? document.querySelector(root)
       : root ? root : null;
     this.root.addEventListener('click', function(e){
-      var p, n;
-      if (!(p = n = ld$.parent(e.target, '.ldfd-toggle', this$.root))) {
+      var n, p;
+      n = e.target;
+      while (n && n !== this$.root && (!n.matches || (n.matches && !n.matches('.ldfd-toggle')))) {
+        n = n.parentNode;
+      }
+      if (!(n && n !== this$.root)) {
         return;
       }
+      p = n;
       while (p = p.nextSibling) {
         if (p.classList && p.classList.contains('ldfd-menu')) {
           break;

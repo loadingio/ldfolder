@@ -23,6 +23,10 @@ include required js and css file, then:
           .ldfd-item
           .ldfd-item
 
+## Customization
+
+custom highlight style by overwritting `.ldfolder.highlight` and `.ldfolder.active` style.
+
 
 ## License
 

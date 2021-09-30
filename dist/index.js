@@ -4,6 +4,10 @@
   ldfolder = function(opt){
     var root, this$ = this;
     root = opt.root;
+    this._delta = {
+      wk: new WeakMap(),
+      set: new Set()
+    };
     this.exclusive = opt.exclusive || false;
     this.root = root = typeof root === 'string'
       ? document.querySelector(root)
@@ -33,8 +37,26 @@
     fit: function(menu){
       return this.toggle(menu, menu.parentNode.classList.contains('show'), true);
     },
-    toggle: function(menu, v, force, internal, delta){
-      var ison, ch, sh, n, this$ = this;
+    toggle: function(menu, v, force, internal){
+      var s, list, results$ = [], this$ = this;
+      force == null && (force = false);
+      internal == null && (internal = false);
+      this._toggle(menu, v, force, internal);
+      s = this._delta.set;
+      while (s.size) {
+        list = Array.from(s);
+        s.clear();
+        results$.push(list.map(fn$));
+      }
+      return results$;
+      function fn$(it){
+        var isOn;
+        isOn = it.parentNode.classList.contains('show');
+        return this$._toggle(it, isOn, true, true);
+      }
+    },
+    _toggle: function(menu, v, force, internal){
+      var ison, ch, delta, sh, n, this$ = this;
       force == null && (force = false);
       internal == null && (internal = false);
       ison = menu.parentNode.classList.contains('show');
@@ -48,29 +70,37 @@
           if (it.contains(menu) || menu.contains(it)) {
             return;
           }
-          return this$.toggle(it, false, false, true);
+          return this$._toggle(it, false, false, true);
         });
       }
       ch = getComputedStyle(menu).height || 0;
       menu.style.height = "";
       menu.offsetHeight;
-      sh = menu.scrollHeight + (delta != null ? delta : 0);
+      delta = 0;
+      if (internal) {
+        delta = this._delta.wk.get(menu) || 0;
+        this._delta.wk['delete'](menu);
+      }
+      sh = menu.scrollHeight + delta;
       menu.style.height = ch;
       menu.offsetHeight;
       menu.style.height = (!v ? 0 : sh) + "px";
       menu.parentNode.classList.toggle('show', v);
       n = menu;
-      if (!internal) {
-        while (n.parentNode && n.parentNode !== this.root) {
-          n = n.parentNode;
-          if (!n.matches('.ldfd-menu')) {
-            continue;
-          }
-          this.toggle(n, true, true, true, (!v ? 0 : sh) - +ch.replace('px', ''));
-          break;
+      while (n.parentNode && n.parentNode !== this.root) {
+        n = n.parentNode;
+        if (!n.matches('.ldfd-menu')) {
+          continue;
         }
+        this.delta(n, (!v ? 0 : sh) - +ch.replace('px', ''));
+        break;
       }
       return v;
+    },
+    delta: function(node, value){
+      var ret;
+      this._delta.wk.set(node, ret = (this._delta.wk.get(node) || 0) + value);
+      return this._delta.set.add(node);
     }
   });
   if (typeof module != 'undefined' && module !== null) {

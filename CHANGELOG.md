@@ -1,5 +1,11 @@
 # Change Logs
 
+## v0.0.8
+
+ - fix bug: incorrect height calculation for multiple children menu.
+   - batch update parent height by storing delta with WeakMap and Set
+
+
 ## v0.0.7
 
  - fix bug: incorrect exclusive behavior when applying 0.0.6 fix

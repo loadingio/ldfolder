@@ -14,7 +14,12 @@ ldfolder = (opt) ->
 ldfolder.prototype = Object.create(Object.prototype) <<< do
   fit: (menu) -> @toggle menu, menu.parentNode.classList.contains(\show), true
 
-  toggle: (menu, v, force = false, internal = false) ->
+  # - menu: .ldfd-menu node
+  # - v: true to open, false to close. undefined to toggle.
+  # - force: force update even if state is the same
+  # - internal: called internally, to ignore some check like exclusive
+  # - delta: passed from child. provide information about delta of child menu height for parent to adopt
+  toggle: (menu, v, force = false, internal = false, delta) ->
     ison = menu.parentNode.classList.contains \show
     if (v = if v? => v else !ison) == ison and !force => return
     if @exclusive and v and !internal =>
@@ -26,13 +31,19 @@ ldfolder.prototype = Object.create(Object.prototype) <<< do
     # 'sh' - get fit-content-height ( scrollHeight) by clear height
     menu.style.height = ""
     menu.offsetHeight # force relayout
-    sh = menu.scrollHeight
+    sh = menu.scrollHeight + (if delta? => delta else 0)
     # restore height to current height
     menu.style.height = ch
     menu.offsetHeight # force relayout
     # ... and transition to destination value.
     menu.style.height = "#{if !v => 0 else sh}px"
     menu.parentNode.classList.toggle \show, v
+    n = menu
+    while n.parentNode and n.parentNode != @root
+      n = n.parentNode
+      if !n.matches('.ldfd-menu') => continue
+      @toggle n, v, true, true, ((if !v => 0 else sh) - +ch.replace('px',''))
+      break
     return v
 
 if module? => module.exports = ldfolder

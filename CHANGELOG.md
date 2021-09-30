@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.0.6
+
+ - correct nested folder height
+
+
 ## v0.0.5
 
  - add `exclusive` option for keeping only one folder opened.

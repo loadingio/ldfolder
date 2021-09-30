@@ -33,8 +33,8 @@
     fit: function(menu){
       return this.toggle(menu, menu.parentNode.classList.contains('show'), true);
     },
-    toggle: function(menu, v, force, internal){
-      var ison, ch, sh, this$ = this;
+    toggle: function(menu, v, force, internal, delta){
+      var ison, ch, sh, n, this$ = this;
       force == null && (force = false);
       internal == null && (internal = false);
       ison = menu.parentNode.classList.contains('show');
@@ -54,11 +54,20 @@
       ch = getComputedStyle(menu).height || 0;
       menu.style.height = "";
       menu.offsetHeight;
-      sh = menu.scrollHeight;
+      sh = menu.scrollHeight + (delta != null ? delta : 0);
       menu.style.height = ch;
       menu.offsetHeight;
       menu.style.height = (!v ? 0 : sh) + "px";
       menu.parentNode.classList.toggle('show', v);
+      n = menu;
+      while (n.parentNode && n.parentNode !== this.root) {
+        n = n.parentNode;
+        if (!n.matches('.ldfd-menu')) {
+          continue;
+        }
+        this.toggle(n, v, true, true, (!v ? 0 : sh) - +ch.replace('px', ''));
+        break;
+      }
       return v;
     }
   });

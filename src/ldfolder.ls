@@ -39,10 +39,10 @@ ldfolder.prototype = Object.create(Object.prototype) <<< do
     menu.style.height = "#{if !v => 0 else sh}px"
     menu.parentNode.classList.toggle \show, v
     n = menu
-    while n.parentNode and n.parentNode != @root
+    if !internal => while n.parentNode and n.parentNode != @root
       n = n.parentNode
       if !n.matches('.ldfd-menu') => continue
-      @toggle n, v, true, true, ((if !v => 0 else sh) - +ch.replace('px',''))
+      @toggle n, true, true, true, ((if !v => 0 else sh) - +ch.replace('px',''))
       break
     return v
 

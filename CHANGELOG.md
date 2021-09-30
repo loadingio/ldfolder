@@ -1,5 +1,10 @@
 # Change Logs
 
+## v0.0.7
+
+ - fix bug: incorrect exclusive behavior when applying 0.0.6 fix
+
+
 ## v0.0.6
 
  - correct nested folder height

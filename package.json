@@ -3,7 +3,7 @@
   "name": "ldfolder",
   "license": "MIT",
   "description": "simple folder widget",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "files": [
     "dist/**/*"
   ],

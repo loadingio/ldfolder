@@ -60,13 +60,15 @@
       menu.style.height = (!v ? 0 : sh) + "px";
       menu.parentNode.classList.toggle('show', v);
       n = menu;
-      while (n.parentNode && n.parentNode !== this.root) {
-        n = n.parentNode;
-        if (!n.matches('.ldfd-menu')) {
-          continue;
+      if (!internal) {
+        while (n.parentNode && n.parentNode !== this.root) {
+          n = n.parentNode;
+          if (!n.matches('.ldfd-menu')) {
+            continue;
+          }
+          this.toggle(n, true, true, true, (!v ? 0 : sh) - +ch.replace('px', ''));
+          break;
         }
-        this.toggle(n, v, true, true, (!v ? 0 : sh) - +ch.replace('px', ''));
-        break;
       }
       return v;
     }

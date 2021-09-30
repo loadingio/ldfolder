@@ -3,3 +3,5 @@ node_modules
 .swp
 *.log
 secret.*
+web/.view
+web/static/assets/lib

@@ -13,6 +13,12 @@ include required js and css file, then:
     folder.toggle('some-subnode', true);
 
 
+## Constructor Options
+
+ - `root`: DOM root for this ldfolder.
+ - `exclusive`: only one folder can be opened at a time if set to true.
+   - default false.
+
 ## Sample ldfd structure
 
     .ldfd

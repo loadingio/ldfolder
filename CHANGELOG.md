@@ -1,5 +1,18 @@
 # Change Logs
 
+## v0.0.9
+
+ - check window for existency before adding lfolder object
+ - rename `ldfolder.js`, `ldfolder.min.js` to `index.js` and `index.min.js`
+ - rename `ldfolder.css`, `ldfolder.min.css` to `index.css` and `index.min.css`
+ - upgrade modules
+ - release with compact directory structure
+ - add `style` in `package.json`
+ - add `main` and `browser` field in `package.json`.
+ - further minimize generated js file with mangling and compression
+ - patch test code to make it work with upgraded modules
+
+
 ## v0.0.8
 
  - fix bug: incorrect height calculation for multiple children menu.

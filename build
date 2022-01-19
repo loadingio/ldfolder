@@ -4,21 +4,15 @@ echo "prepare..."
 rm -rf dist
 mkdir -p dist
 
-echo "building ldfolder.ls -> ldfolder.js ..."
-./node_modules/.bin/lsc -cp src/ldfolder.ls > dist/ldfolder.js
-echo "minify ldfolder.js -> ldfolder.min.js ..."
-./node_modules/.bin/uglifyjs dist/ldfolder.js > dist/ldfolder.min.js
+echo "building index.ls -> index.js ..."
+./node_modules/.bin/lsc -cp --no-header src/index.ls > dist/index.js
+echo "minify index.js -> index.min.js ..."
+./node_modules/.bin/uglifyjs dist/index.js -c -m > dist/index.min.js
 
-echo "build src/ldfolder.styl -> dist/ldfolder.css ..."
-./node_modules/.bin/stylus -p src/ldfolder.styl > dist/ldfolder.css
-echo "minifying ldfolder.css ..."
-./node_modules/.bin/uglifycss dist/ldfolder.css > dist/ldfolder.min.css
-
-# we will remove ldfolder.js / ldfolder.css in the future release
-cp dist/ldfolder.js dist/index.js
-cp dist/ldfolder.min.js dist/index.min.js
-cp dist/ldfolder.css dist/index.css
-cp dist/ldfolder.min.css dist/index.min.css
+echo "build src/index.styl -> dist/index.css ..."
+./node_modules/.bin/stylus -p src/index.styl > dist/index.css
+echo "minifying index.css ..."
+./node_modules/.bin/uglifycss dist/index.css > dist/index.min.css
 
 echo "copy dist to web ..."
 rm -rf web/static/assets/lib/ldfolder/dev/

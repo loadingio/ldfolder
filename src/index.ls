@@ -67,4 +67,4 @@ ldfolder.prototype = Object.create(Object.prototype) <<< do
     @_delta.set.add node
 
 if module? => module.exports = ldfolder
-else window.ldfolder = ldfolder
+else if window? => window.ldfolder = ldfolder

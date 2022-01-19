@@ -1,10 +1,10 @@
 doctype html
 html
-  include @/@loadingio/bootstrap.ext/dist/index.pug
+  include @/@loadingio/bootstrap.ext/index.pug
   head
-    +css("/assets/lib/bootstrap/main/css/bootstrap.min.css")
-    +css("/assets/lib/bootstrap.ldui/main/bootstrap.ldui.min.css")
-    +css("/assets/lib/ldfolder/dev/ldfolder.min.css")
+    +css("/assets/lib/bootstrap/main/dist/css/bootstrap.min.css")
+    +css("/assets/lib/@loadingio/bootstrap.ext/main/index.min.css")
+    +css("/assets/lib/ldfolder/dev/index.min.css")
   body
     .w-1024.mx-auto.rwd.my-4
       #ldfd.ldfd
@@ -15,7 +15,7 @@ html
             .ldfd-item ITEM3
             .ldfd-item ITEM4
 
-    +script("/assets/lib/@loadingio/ldquery/main/ldq.min.js")
-    +script("/assets/lib/ldfolder/dev/ldfolder.min.js")
-    script: :lsc
+    +script("/assets/lib/@loadingio/ldquery/main/index.min.js")
+    +script("/assets/lib/ldfolder/dev/index.min.js")
+    script(type="module"): :lsc
       fd = new ldfolder root: '#ldfd'

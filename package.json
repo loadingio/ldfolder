@@ -3,7 +3,10 @@
   "name": "ldfolder",
   "license": "MIT",
   "description": "simple folder widget",
-  "version": "0.0.8",
+  "version": "0.0.9",
+  "style": "dist/index.min.css",
+  "browser": "dist/index.min.js",
+  "main": "dist/index.min.js",
   "files": [
     "dist/**/*"
   ],
@@ -20,15 +23,15 @@
     "start": "npx server -r web -o true"
   },
   "devDependencies": {
-    "@loadingio/ldquery": "^1.1.1",
+    "@loadingio/ldquery": "^3.0.1",
     "bootstrap": "^4.5.3",
-    "@loadingio/bootstrap.ext": "^0.0.1",
+    "@loadingio/bootstrap.ext": "^0.0.4",
     "bootstrap.native": "^3.0.13",
-    "fedep": "^0.0.15",
-    "ldview": "^0.2.3",
+    "fedep": "^1.1.0",
+    "ldview": "^1.0.0",
     "stylus": "^0.55.0",
-    "@zbryikt/template": "^2.3.21",
-    "uglify-js": "^3.2.0",
+    "@zbryikt/template": "^2.3.33",
+    "uglify-js": "^3.13.1",
     "uglifycss": "^0.0.29"
   },
   "frontendDependencies": {
